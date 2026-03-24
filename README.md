@@ -38,7 +38,7 @@ Run the following commands in Cloud Shell:
 
 ### Create and Enter Directory
 ```bash
-mkdir mzansi-ai-studio && cd mzansi-ai-studio
+mkdir imaging-app && cd imaging-app
 ```
 
 ### Create Requirements File
