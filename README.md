@@ -1,6 +1,6 @@
-# Mzansi AI Visual Asset Generator
+# AI Visual Asset Generator
 
-A professional web application built for the GDG Johannesburg: Build with AI 2026 event. This project demonstrates how to integrate Google Imagen 4 via the Vertex AI API into a functional Streamlit interface, deployed on Google Cloud Platform.
+A professional web application built by Tholumuzi Kuboni. This project demonstrates how to integrate Google Imagen 4 via the Vertex AI API into a functional Streamlit interface, deployed on Google Cloud Platform.
 
 ---
 
