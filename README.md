@@ -99,7 +99,7 @@ Use the **Web Preview** button and select **Preview on port 8080**
 ## Step 5: Deployment to Cloud Run
 
 ```bash
-gcloud run deploy mzansi-ai-studio     --source .     --region us-central1     --allow-unauthenticated
+gcloud run deploy imaging-app     --source .     --region us-central1     --allow-unauthenticated
 ```
 
 - Confirm service creation when prompted  
