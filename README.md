@@ -1,0 +1,125 @@
+# Mzansi AI Visual Asset Generator
+
+A professional web application built for the GDG Johannesburg: Build with AI 2026 event. This project demonstrates how to integrate Google Imagen 4 via the Vertex AI API into a functional Streamlit interface, deployed on Google Cloud Platform.
+
+---
+
+## Technical Stack
+
+<p align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" width="40"/>
+  <img src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.png" alt="Streamlit" width="100"/>
+  <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="40"/>
+</p>
+
+- AI Model: Google Imagen 4 (imagen-4.0-generate-001)  
+- Framework: Streamlit (Python)  
+- Infrastructure: Google Cloud Vertex AI  
+- Deployment: Google Cloud Run & Docker  
+
+---
+
+## Step 1: Initialize the Environment
+
+1. Open the Google Cloud Console: https://console.cloud.google.com/  
+2. Click the **Activate Cloud Shell** icon in the top right taskbar.  
+3. Enable the required APIs:
+
+```bash
+gcloud services enable aiplatform.googleapis.com run.googleapis.com cloudbuild.googleapis.com
+```
+
+---
+
+## Step 2: Create the Project Files
+
+Run the following commands in Cloud Shell:
+
+### Create and Enter Directory
+```bash
+mkdir mzansi-ai-studio && cd mzansi-ai-studio
+```
+
+### Create Requirements File
+```bash
+cat <<EOF > requirements.txt
+streamlit
+google-cloud-aiplatform
+EOF
+```
+
+### Create Dockerfile
+```bash
+cat <<EOF > Dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+EXPOSE 8080
+CMD ["python3", "-m", "streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
+EOF
+```
+
+### Create Application File
+```bash
+touch app.py
+```
+
+---
+
+## Step 3: Add the Application Logic
+
+1. Open the Cloud Shell Editor  
+2. Navigate to the project folder  
+3. Open `app.py`  
+4. Paste your application code  
+5. Update `PROJECT_ID` with your Google Cloud Project ID  
+6. Save the file  
+
+---
+
+## Step 4: Local Development and Testing
+
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Run Streamlit App
+```bash
+python3 -m streamlit run app.py     --server.port 8080     --server.enableCORS=false     --server.enableXsrfProtection=false     --browser.serverAddress=localhost
+```
+
+### Preview Application
+Use the **Web Preview** button and select **Preview on port 8080**
+
+---
+
+## Step 5: Deployment to Cloud Run
+
+```bash
+gcloud run deploy mzansi-ai-studio     --source .     --region us-central1     --allow-unauthenticated
+```
+
+- Confirm service creation when prompted  
+- Retrieve your public Service URL after deployment  
+
+---
+
+## Use Case
+
+This application enables small businesses and creators to generate high-quality marketing visuals without expensive equipment. It simplifies access to advanced AI by providing an intuitive web interface built on scalable cloud infrastructure.
+
+---
+
+## Summary
+
+This project demonstrates a full pipeline:
+
+- Cloud setup  
+- Application development  
+- Containerization  
+- Deployment to production  
+
+You now have a complete, production-ready AI application deployed on a global platform.
