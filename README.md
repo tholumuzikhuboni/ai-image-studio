@@ -8,9 +8,9 @@ A professional web application built by Tholumuzi Kuboni. This project demonstra
 
 <p align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" width="40"/>
-  <img src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.png" alt="Streamlit" width="100"/>
   <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker" width="40"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="40"/>
+  <img src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.png" alt="Streamlit" width="100"/>
 </p>
 
 - AI Model: Google Imagen 4 (imagen-4.0-generate-001)  
@@ -63,12 +63,27 @@ opencv-python-headless
 ```bash
 cat <<EOF > Dockerfile
 FROM python:3.11-slim
+
+# Install system dependencies for audio/image processing
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
+
 COPY . .
-RUN pip install -r requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 EXPOSE 8080
-CMD ["python3", "-m", "streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
-EOF
+
+# Environment variables for Streamlit
+ENV STREAMLIT_SERVER_PORT=8080
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+
+CMD ["streamlit", "run", "app.py"]
 ```
 
 ### Create Application File
@@ -78,18 +93,27 @@ touch app.py
 
 ---
 
-## Step 3: Add the Application Logic
+## Step 3: Create a storage bucket
+```bash
+# Replace YOUR_BUCKET_NAME with a globally unique bucket name
+gcloud storage buckets create gs://YOUR_BUCKET_NAME
+```
+
+---
+
+## Step 4: Add the Application Logic
 
 1. Open the Cloud Shell Editor  
 2. Navigate to the project folder  
 3. Open `app.py`  
 4. Paste your application code  
-5. Update `PROJECT_ID` with your Google Cloud Project ID  
-6. Save the file  
+5. Update `PROJECT_ID` with your Google Cloud Project ID
+6. Update `BUCKET_NAME` with your Cloud Storage bucket name
+7. Save the file  
 
 ---
 
-## Step 4: Local Development and Testing
+## Step 5: Local Development and Testing
 
 ### Install Dependencies
 ```bash
@@ -106,7 +130,7 @@ Use the **Web Preview** button and select **Preview on port 8080**
 
 ---
 
-## Step 5: Deployment to Cloud Run
+## Step 6: Deployment to Cloud Run
 
 ```bash
 gcloud run deploy imaging-app     --source .     --region us-central1     --allow-unauthenticated
