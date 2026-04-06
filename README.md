@@ -51,7 +51,12 @@ mkdir imaging-app && cd imaging-app
 cat <<EOF > requirements.txt
 streamlit
 google-cloud-aiplatform
-EOF
+google-cloud-storage
+google-cloud-speech
+st-audiorec
+Pillow
+numpy
+opencv-python-headless
 ```
 
 ### Create Dockerfile
