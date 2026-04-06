@@ -27,7 +27,12 @@ A professional web application built by Tholumuzi Kuboni. This project demonstra
 3. Enable the required APIs:
 
 ```bash
-gcloud services enable aiplatform.googleapis.com run.googleapis.com cloudbuild.googleapis.com
+gcloud services enable \
+    aiplatform.googleapis.com \
+    speech.googleapis.com \
+    storage.googleapis.com \
+    run.googleapis.com \
+    cloudbuild.googleapis.com
 ```
 
 ---
