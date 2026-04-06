@@ -53,7 +53,7 @@ streamlit
 google-cloud-aiplatform
 google-cloud-storage
 google-cloud-speech
-st-audiorec
+streamlit-audiorec
 Pillow
 numpy
 opencv-python-headless
