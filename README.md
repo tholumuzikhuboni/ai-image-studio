@@ -50,13 +50,9 @@ mkdir imaging-app && cd imaging-app
 ```bash
 cat <<EOF > requirements.txt
 streamlit
-google-cloud-aiplatform
+google-genai
 google-cloud-storage
-google-cloud-speech
-streamlit-audiorec
 Pillow
-numpy
-opencv-python-headless
 ```
 
 ### Create Dockerfile
