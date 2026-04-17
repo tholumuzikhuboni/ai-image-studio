@@ -1,4 +1,4 @@
-# AI Visual Asset Generator
+# AI Image Studio
 
 A professional web application built by Tholumuzi Kuboni. This project demonstrates how to integrate Google Imagen 4 via the Vertex AI API into a functional Streamlit interface, deployed on Google Cloud Platform.
 
